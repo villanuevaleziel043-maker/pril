@@ -1,0 +1,2261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZHEAYPRILL'S COSMETICS | Elegant Beauty Essentials</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --primary: #d47a8f;
+      --primary-dark: #b85068;
+      --secondary: #9b415a;
+      --accent: #f8c3cd;
+      --gold: #d4af37;
+      --promo-red: #e63946;
+      --bg-gradient: linear-gradient(135deg, #fff6f8 0%, #fdeef2 50%, #fbf0f5 100%);
+      --card-bg: rgba(255, 255, 255, 0.95);
+      --text-main: #332227;
+      --text-light: #7a6369;
+      --shadow-sm: 0 4px 15px rgba(212, 122, 143, 0.12);
+      --shadow-lg: 0 10px 30px rgba(184, 80, 104, 0.2);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: var(--bg-gradient);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* --- LOGIN / REGISTER OVERLAY --- */
+    .auth-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(42, 24, 29, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 5000;
+      display: none; /* Nakatago muna sa simula */
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .auth-card {
+      background: white;
+      width: 100%;
+      max-width: 440px;
+      border-radius: var(--radius);
+      padding: 35px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      text-align: center;
+      border: 2px solid var(--accent);
+      animation: zoomIn 0.3s ease;
+      position: relative;
+    }
+
+    .close-auth {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-light);
+    }
+
+    @keyframes zoomIn {
+      from { transform: scale(0.9); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .auth-card h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary-dark);
+      margin-bottom: 5px;
+      font-size: 2rem;
+    }
+
+    .auth-card p {
+      color: var(--text-light);
+      font-size: 0.85rem;
+      margin-bottom: 25px;
+    }
+
+    .auth-toggle-btns {
+      display: flex;
+      background: #fdeef2;
+      border-radius: 25px;
+      padding: 4px;
+      margin-bottom: 20px;
+    }
+
+    .auth-toggle-btn {
+      flex: 1;
+      border: none;
+      background: transparent;
+      padding: 8px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      color: var(--text-light);
+      transition: all 0.3s ease;
+    }
+
+    .auth-toggle-btn.active {
+      background: var(--primary-dark);
+      color: white;
+    }
+
+    .auth-form-group {
+      text-align: left;
+      margin-bottom: 15px;
+    }
+
+    .auth-form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: var(--primary-dark);
+    }
+
+    .auth-form-group input {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--accent);
+      outline: none;
+      font-size: 0.9rem;
+    }
+
+    .auth-submit-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 25px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 0.95rem;
+      margin-top: 10px;
+      box-shadow: 0 4px 12px rgba(184, 80, 104, 0.3);
+      transition: all 0.2s ease;
+    }
+
+    .auth-submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(184, 80, 104, 0.4);
+    }
+
+    /* --- MAIN SITE WRAPPER --- */
+    #appContent {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* --- HEADER & NAVIGATION --- */
+    header {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 20px rgba(184, 80, 104, 0.1);
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .top-bar {
+      background: linear-gradient(90deg, #b85068, #d47a8f, #e63946);
+      color: white;
+      text-align: center;
+      padding: 8px 15px;
+      font-size: 0.82rem;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+    }
+
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 25px;
+    }
+
+    .brand-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      text-decoration: none;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo i {
+      color: var(--gold);
+    }
+
+    .nav-tabs {
+      display: flex;
+      list-style: none;
+      gap: 10px;
+    }
+
+    .nav-tab {
+      padding: 10px 18px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 0.92rem;
+      color: var(--text-main);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-tab:hover, .nav-tab.active {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      box-shadow: 0 4px 12px rgba(184, 80, 104, 0.3);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .user-profile-badge {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--primary-dark);
+      background: #fdeef2;
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .logout-btn {
+      background: #ffeff2;
+      border: 1px solid #ffb3c1;
+      color: #d90429;
+      padding: 8px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .logout-btn:hover {
+      background: #d90429;
+      color: white;
+    }
+
+    .cart-btn {
+      position: relative;
+      background: #fff0f3;
+      color: var(--primary-dark);
+      border: 2px solid var(--accent);
+      padding: 10px 18px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .cart-btn:hover {
+      background: var(--primary-dark);
+      color: white;
+      border-color: var(--primary-dark);
+    }
+
+    .cart-count {
+      background: var(--gold);
+      color: white;
+      font-size: 0.75rem;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+
+    /* --- CONTAINER & SECTIONS --- */
+    .container {
+      max-width: 1280px;
+      margin: 30px auto;
+      padding: 0 20px;
+      flex: 1;
+      width: 100%;
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.4s ease-in-out forwards;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* --- HOME SECTION --- */
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1400&q=80') center/cover;
+      height: 480px;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      box-shadow: var(--shadow-lg);
+      margin-bottom: 40px;
+    }
+
+    .hero-content h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      margin-bottom: 25px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      font-weight: 300;
+    }
+
+    .btn-glow {
+      background: linear-gradient(135deg, var(--gold), #f3e5ab);
+      color: #4a3300;
+      padding: 14px 35px;
+      border-radius: 30px;
+      border: none;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .btn-glow:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+    }
+
+    /* --- INTERACTIVE 3D PRODUCT MODEL SHOWCASE --- */
+    .showcase-3d-section {
+      margin-bottom: 50px;
+      position: relative;
+    }
+
+    .grid-3d-models {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      perspective: 1000px;
+    }
+
+    .card-3d-wrapper {
+      perspective: 1000px;
+    }
+
+    .card-3d {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      border-radius: 20px;
+      padding: 25px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(184, 80, 104, 0.12), inset 0 0 15px rgba(255, 255, 255, 0.5);
+      transform-style: preserve-3d;
+      transition: transform 0.15s ease-out, box-shadow 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-3d:hover {
+      box-shadow: 0 30px 50px rgba(184, 80, 104, 0.25), 0 0 20px rgba(212, 175, 55, 0.4);
+    }
+
+    .card-3d-img-container {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      margin-bottom: 15px;
+      transform-style: preserve-3d;
+    }
+
+    .card-3d-img-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 15px 12px rgba(0,0,0,0.25));
+      transform: translateZ(40px);
+      transition: transform 0.3s ease;
+    }
+
+    .card-3d:hover .card-3d-img-container img {
+      transform: translateZ(60px) scale(1.05) rotate(-3deg);
+    }
+
+    .card-3d-tag {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: linear-gradient(135deg, var(--gold), #f3e5ab);
+      color: #3d2d00;
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 12px;
+      transform: translateZ(30px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .card-3d-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: var(--primary-dark);
+      margin-bottom: 5px;
+      transform: translateZ(30px);
+    }
+
+    .card-3d-desc {
+      font-size: 0.82rem;
+      color: var(--text-light);
+      margin-bottom: 15px;
+      transform: translateZ(20px);
+    }
+
+    .card-3d-btn {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transform: translateZ(35px);
+      box-shadow: 0 5px 15px rgba(184, 80, 104, 0.3);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .card-3d-btn:hover {
+      background: var(--primary-dark);
+      transform: translateZ(45px) scale(1.05);
+    }
+
+    /* Floating background 3D Orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(40px);
+      z-index: -1;
+      opacity: 0.5;
+      animation: floatOrb 6s ease-in-out infinite alternate;
+    }
+
+    .orb-1 {
+      width: 150px;
+      height: 150px;
+      background: var(--accent);
+      top: -20px;
+      left: 10%;
+    }
+
+    .orb-2 {
+      width: 200px;
+      height: 200px;
+      background: #fdeef2;
+      bottom: -30px;
+      right: 10%;
+      animation-delay: -3s;
+    }
+
+    @keyframes floatOrb {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(-20px) scale(1.1); }
+    }
+
+    .promo-banner-card {
+      background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 100%);
+      border-radius: var(--radius);
+      padding: 30px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      box-shadow: 0 8px 25px rgba(255, 117, 140, 0.3);
+    }
+
+    .promo-banner-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    .promo-badge-tag {
+      background: white;
+      color: var(--promo-red);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-weight: 700;
+      font-size: 0.85rem;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: var(--primary-dark);
+      text-align: center;
+      margin-bottom: 30px;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: var(--gold);
+      margin: 10px auto 0;
+      border-radius: 2px;
+    }
+
+    .categories-preview {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      margin-bottom: 50px;
+    }
+
+    .cat-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 25px 20px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(212, 122, 143, 0.15);
+    }
+
+    .cat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary);
+    }
+
+    .cat-card i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+
+    /* --- PRODUCTS SECTION --- */
+    .shop-controls {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 30px;
+      background: white;
+      padding: 18px 25px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .category-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .filter-btn {
+      padding: 8px 16px;
+      border-radius: 20px;
+      border: 1px solid var(--accent);
+      background: #fff6f8;
+      color: var(--text-main);
+      cursor: pointer;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--primary-dark);
+      color: white;
+      border-color: var(--primary-dark);
+    }
+
+    .filter-btn.promo-btn {
+      border-color: var(--promo-red);
+      color: var(--promo-red);
+    }
+
+    .filter-btn.promo-btn.active, .filter-btn.promo-btn:hover {
+      background: var(--promo-red);
+      color: white;
+    }
+
+    .filter-btn.bestseller-btn {
+      border-color: var(--gold);
+      color: #947100;
+    }
+
+    .filter-btn.bestseller-btn.active, .filter-btn.bestseller-btn:hover {
+      background: var(--gold);
+      color: white;
+    }
+
+    .search-box {
+      position: relative;
+      min-width: 250px;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 10px 15px 10px 40px;
+      border-radius: 25px;
+      border: 1px solid #e2c0c8;
+      outline: none;
+      font-size: 0.9rem;
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--primary-dark);
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 25px;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(212, 122, 143, 0.1);
+      position: relative;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .product-img-wrapper {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      background: #f8f8f8;
+      cursor: pointer;
+    }
+
+    .product-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .product-card:hover .product-img-wrapper img {
+      transform: scale(1.08);
+    }
+
+    /* BADGES FOR BEST SELLER AND PROMOS */
+    .badge-container {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      z-index: 5;
+    }
+
+    .badge-bestseller {
+      background: linear-gradient(135deg, #d4af37, #f3e5ab);
+      color: #3d2d00;
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .badge-promo {
+      background: linear-gradient(135deg, #e63946, #ff758c);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: 12px;
+      text-transform: uppercase;
+      box-shadow: 0 2px 8px rgba(230, 57, 70, 0.3);
+    }
+
+    .product-details {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .product-cat {
+      font-size: 0.75rem;
+      color: var(--primary-dark);
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .product-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 5px 0 8px;
+      color: var(--text-main);
+      line-height: 1.3;
+      cursor: pointer;
+    }
+
+    .product-title:hover {
+      color: var(--primary-dark);
+    }
+
+    .product-shade-select {
+      margin: 8px 0 12px;
+    }
+
+    .product-shade-select select {
+      width: 100%;
+      padding: 7px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--accent);
+      background: #fffbfd;
+      font-size: 0.82rem;
+      color: var(--text-main);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .price-row {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 10px;
+    }
+
+    .price-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .original-price {
+      font-size: 0.8rem;
+      color: #a08088;
+      text-decoration: line-through;
+    }
+
+    .product-price {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+
+    .product-price.discounted {
+      color: var(--promo-red);
+    }
+
+    .add-to-cart-btn {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .add-to-cart-btn:hover {
+      background: var(--primary-dark);
+      transform: scale(1.05);
+    }
+
+    /* --- CART MODAL / PANEL --- */
+    .cart-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 2000;
+      display: none;
+      justify-content: flex-end;
+    }
+
+    .cart-overlay.active {
+      display: flex;
+    }
+
+    .cart-sidebar {
+      background: white;
+      width: 100%;
+      max-width: 480px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      box-shadow: -5px 0 25px rgba(0,0,0,0.2);
+      animation: slideLeft 0.3s ease-out;
+    }
+
+    @keyframes slideLeft {
+      from { transform: translateX(100%); }
+      to { transform: translateX(0); }
+    }
+
+    .cart-header {
+      padding: 20px;
+      background: var(--bg-gradient);
+      border-bottom: 1px solid var(--accent);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .cart-header h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary-dark);
+    }
+
+    .close-cart {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-light);
+    }
+
+    .cart-body-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .cart-items {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 12px;
+      background: #fff8f9;
+      padding: 12px;
+      border-radius: 12px;
+      border: 1px solid #f3d8df;
+      align-items: center;
+    }
+
+    .cart-item img {
+      width: 65px;
+      height: 65px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .cart-item-shade {
+      font-size: 0.78rem;
+      color: var(--text-light);
+    }
+
+    .cart-item-price {
+      font-weight: 700;
+      color: var(--primary-dark);
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .qty-btn {
+      background: white;
+      border: 1px solid var(--accent);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    /* PROMO CODE SECTION IN CART */
+    .promo-code-container {
+      background: #fff0f3;
+      border: 1px dashed var(--primary-dark);
+      padding: 12px;
+      border-radius: 10px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .promo-code-container input {
+      flex: 1;
+      padding: 8px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--accent);
+      outline: none;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+    }
+
+    .promo-code-container button {
+      background: var(--primary-dark);
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+
+    /* CUSTOMER INFORMATION FORM IN CHECKOUT */
+    .checkout-customer-section {
+      background: #fff6f8;
+      border: 1px solid var(--accent);
+      padding: 15px;
+      border-radius: 12px;
+    }
+
+    .checkout-customer-section h4 {
+      font-size: 0.95rem;
+      color: var(--primary-dark);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cust-input-group {
+      margin-bottom: 10px;
+    }
+
+    .cust-input-group label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--text-main);
+    }
+
+    .cust-input-group input, .cust-input-group textarea {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--accent);
+      outline: none;
+      font-size: 0.85rem;
+      background: white;
+    }
+
+    .cart-footer {
+      padding: 20px;
+      border-top: 1px solid var(--accent);
+      background: #fffbfd;
+    }
+
+    .cart-summary-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      margin-bottom: 6px;
+      color: var(--text-light);
+    }
+
+    .cart-total-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 10px 0 15px;
+      color: var(--text-main);
+      border-top: 1px solid #f0d5dd;
+      padding-top: 8px;
+    }
+
+    .payment-options {
+      margin-bottom: 15px;
+    }
+
+    .payment-options label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 8px;
+      color: var(--primary-dark);
+    }
+
+    .payment-methods {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .pay-method {
+      border: 1.5px solid #e0c2cb;
+      padding: 10px;
+      border-radius: 10px;
+      text-align: center;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      background: white;
+    }
+
+    .pay-method.active {
+      border-color: var(--primary-dark);
+      background: #ffeef2;
+      color: var(--primary-dark);
+    }
+
+    .gcash-details {
+      display: none;
+      background: #eef7ff;
+      border: 1px dashed #0072ff;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-size: 0.8rem;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold), #c49a20);
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .checkout-btn:hover {
+      opacity: 0.95;
+      transform: translateY(-2px);
+    }
+
+    /* --- HISTORY TAB --- */
+    .history-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-sm);
+      border-left: 5px solid var(--primary);
+    }
+
+    .history-header {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #f0d5dd;
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+    }
+
+    .order-id {
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+
+    .order-date {
+      font-size: 0.85rem;
+      color: var(--text-light);
+    }
+
+    .history-customer-info {
+      background: #fff8f9;
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      font-size: 0.82rem;
+      color: var(--text-main);
+      border: 1px solid #f3d8df;
+    }
+
+    .history-items {
+      margin-bottom: 12px;
+    }
+
+    .history-item-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+    }
+
+    .history-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: #e1f5fe;
+      color: #0288d1;
+    }
+
+    /* --- ABOUT & CONTACT TABS --- */
+    .info-section {
+      background: white;
+      border-radius: var(--radius);
+      padding: 35px;
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 30px;
+    }
+
+    .info-section h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary-dark);
+      font-size: 1.6rem;
+      margin-bottom: 15px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 500;
+      font-size: 0.88rem;
+      margin-bottom: 5px;
+    }
+
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      outline: none;
+      font-size: 0.9rem;
+    }
+
+    .submit-btn {
+      background: var(--primary-dark);
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      background: #2a181d;
+      color: #ebd3da;
+      padding: 40px 20px 20px;
+      margin-top: auto;
+    }
+
+    .footer-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .footer-col h4 {
+      font-family: 'Playfair Display', serif;
+      color: var(--gold);
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+    }
+
+    .footer-col p, .footer-col li {
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    .footer-col ul {
+      list-style: none;
+    }
+
+    .copyright {
+      text-align: center;
+      padding-top: 20px;
+      font-size: 0.8rem;
+      color: #a38890;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--primary-dark);
+      color: white;
+      padding: 12px 22px;
+      border-radius: 25px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      z-index: 3000;
+      display: none;
+      animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== AUTHENTICATION OVERLAY ==================== -->
+  <div class="auth-overlay" id="authOverlay">
+    <div class="auth-card">
+      <button class="close-auth" onclick="closeAuthOverlay()">&times;</button>
+      <h2><i class="fas fa-crown" style="color: var(--gold);"></i> ZHEAYPRILL'S</h2>
+      <p>Please log in or sign up to interact with our products.</p>
+
+      <div class="auth-toggle-btns">
+        <button class="auth-toggle-btn active" id="loginTabBtn" onclick="toggleAuthMode('login')">Log In</button>
+        <button class="auth-toggle-btn" id="registerTabBtn" onclick="toggleAuthMode('register')">Sign Up</button>
+      </div>
+
+      <!-- LOGIN FORM -->
+      <form id="loginForm" onsubmit="handleAuthSubmit(event, 'login')">
+        <div class="auth-form-group">
+          <label>Email Address</label>
+          <input type="email" id="loginEmail" required placeholder="customer@example.com">
+        </div>
+        <div class="auth-form-group">
+          <label>Password</label>
+          <input type="password" id="loginPassword" required placeholder="••••••••">
+        </div>
+        <button type="submit" class="auth-submit-btn">Log In to Shop</button>
+      </form>
+
+      <!-- REGISTER FORM -->
+      <form id="registerForm" onsubmit="handleAuthSubmit(event, 'register')" style="display: none;">
+        <div class="auth-form-group">
+          <label>Full Name</label>
+          <input type="text" id="regName" required placeholder="Maria Clara">
+        </div>
+        <div class="auth-form-group">
+          <label>Email Address</label>
+          <input type="email" id="regEmail" required placeholder="maria@example.com">
+        </div>
+        <div class="auth-form-group">
+          <label>Password</label>
+          <input type="password" id="regPassword" required placeholder="••••••••">
+        </div>
+        <button type="submit" class="auth-submit-btn">Create Account & Access</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN APPLICATION CONTENT ==================== -->
+  <div id="appContent">
+
+    <!-- Announcement Bar -->
+    <div class="top-bar">
+      <i class="fas fa-tags"></i> PROMO DEAL: USE CODE <strong>"GLOWZHEAY"</strong> FOR 10% OFF | CODE <strong>"BESTSELLER20"</strong> FOR 20% OFF! <i class="fas fa-sparkles"></i>
+    </div>
+
+    <!-- Header -->
+    <header>
+      <div class="nav-container">
+        <a href="#" class="brand-logo" onclick="switchTab('home')">
+          <i class="fas fa-crown"></i> ZHEAYPRILL'S
+        </a>
+
+        <ul class="nav-tabs">
+          <li class="nav-tab active" data-tab="home" onclick="switchTab('home')"><i class="fas fa-home"></i> Home</li>
+          <li class="nav-tab" data-tab="products" onclick="switchTab('products')"><i class="fas fa-magic"></i> Products</li>
+          <li class="nav-tab" data-tab="about" onclick="switchTab('about')"><i class="fas fa-heart"></i> About Us</li>
+          <li class="nav-tab" data-tab="contact" onclick="switchTab('contact')"><i class="fas fa-envelope"></i> Contact Us</li>
+          <li class="nav-tab" data-tab="history" onclick="switchTab('history')"><i class="fas fa-receipt"></i> Purchase History</li>
+        </ul>
+
+        <div class="nav-actions">
+          <div class="user-profile-badge" id="userBadge">
+            <i class="fas fa-user-circle"></i> <span id="userNameDisplay">Guest</span>
+          </div>
+
+          <button class="logout-btn" id="logoutBtn" onclick="handleLogout()" title="Log out from shop" style="display: none;">
+            <i class="fas fa-sign-out-alt"></i> Log Out
+          </button>
+
+          <button class="cart-btn" onclick="toggleCart()">
+            <i class="fas fa-shopping-bag"></i>
+            <span>Cart</span>
+            <span class="cart-count" id="cartBadge">0</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <div class="container">
+
+      <!-- HOME TAB -->
+      <div id="home" class="tab-content active">
+        <div class="hero">
+          <div class="hero-content">
+            <h1>Unveil Your Inner Glow</h1>
+            <p>Discover luxurious, cruelty-free beauty crafted with vibrant pigments and nourishing ingredients for every unique skin shade.</p>
+            <button class="btn-glow" onclick="switchTab('products')">Shop Collection</button>
+          </div>
+        </div>
+
+        <!-- NEW: INTERACTIVE 3D PRODUCTS SHOWCASE -->
+        <div class="showcase-3d-section">
+          <div class="orb orb-1"></div>
+          <div class="orb orb-2"></div>
+          <h2 class="section-title">✨ Interactive 3D Product Spotlight</h2>
+          
+          <div class="grid-3d-models">
+            <!-- 3D Card 1 -->
+            <div class="card-3d-wrapper">
+              <div class="card-3d" onmousemove="handle3DTilt(event, this)" onmouseleave="reset3DTilt(this)" onclick="handleProductClick(1)">
+                <span class="card-3d-tag">3D MODEL</span>
+                <div class="card-3d-img-container">
+                  <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=500&q=80" alt="3D Lipstick">
+                </div>
+                <h3 class="card-3d-title">Velvet Matte Lipstick</h3>
+                <p class="card-3d-desc">Rich pigment & smooth velvet touch in 3D interactive preview.</p>
+                <button class="card-3d-btn" onclick="event.stopPropagation(); handleProductClick(1)">View Product ₱349</button>
+              </div>
+            </div>
+
+            <!-- 3D Card 2 -->
+            <div class="card-3d-wrapper">
+              <div class="card-3d" onmousemove="handle3DTilt(event, this)" onmouseleave="reset3DTilt(this)" onclick="handleProductClick(15)">
+                <span class="card-3d-tag">3D MODEL</span>
+                <div class="card-3d-img-container">
+                  <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=500&q=80" alt="3D Serum Foundation">
+                </div>
+                <h3 class="card-3d-title">Radiant Serum Foundation</h3>
+                <p class="card-3d-desc">Ultra-lightweight formula with glass-skin radiance finish.</p>
+                <button class="card-3d-btn" onclick="event.stopPropagation(); handleProductClick(15)">View Product ₱599</button>
+              </div>
+            </div>
+
+            <!-- 3D Card 3 -->
+            <div class="card-3d-wrapper">
+              <div class="card-3d" onmousemove="handle3DTilt(event, this)" onmouseleave="reset3DTilt(this)" onclick="handleProductClick(29)">
+                <span class="card-3d-tag">3D MODEL</span>
+                <div class="card-3d-img-container">
+                  <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=500&q=80" alt="3D Eyeshadow Palette">
+                </div>
+                <h3 class="card-3d-title">18-Pan Enchanted Palette</h3>
+                <p class="card-3d-desc">Highly pigmented shimmer and matte eye shades showcase.</p>
+                <button class="card-3d-btn" onclick="event.stopPropagation(); handleProductClick(29)">View Product ₱799</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SPECIAL PROMO BANNER SECTION -->
+        <div class="promo-banner-card">
+          <div class="promo-banner-text">
+            <span class="promo-badge-tag"><i class="fas fa-fire"></i> LIMITED TIME OFFER</span>
+            <h2>Exclusive Beauty Promos & Mega Discounts!</h2>
+            <p>Enjoy up to 20% OFF on selected products + Extra discounts using our Checkout Promo Codes.</p>
+          </div>
+          <button class="btn-glow" style="background: white; color: var(--promo-red);" onclick="filterCategory('Promos')">View Promos</button>
+        </div>
+
+        <!-- BEST SELLERS SHOWCASE -->
+        <h2 class="section-title">🔥 Hot Best Sellers</h2>
+        <div class="products-grid" id="homeBestsellersGrid" style="margin-bottom: 50px;">
+          <!-- Dynamically Populated by JS -->
+        </div>
+
+        <!-- CATEGORIES PREVIEW -->
+        <h2 class="section-title">Explore Categories</h2>
+        <div class="categories-preview">
+          <div class="cat-card" onclick="filterCategory('Lips')">
+            <i class="fas fa-kiss-wink-heart"></i>
+            <h3>Lip Care & Colors</h3>
+            <p>Lipsticks, Tints & Glosses</p>
+          </div>
+          <div class="cat-card" onclick="filterCategory('Face')">
+            <i class="fas fa-smile-beam"></i>
+            <h3>Face Essentials</h3>
+            <p>Foundations, Blushes & Powders</p>
+          </div>
+          <div class="cat-card" onclick="filterCategory('Eyes')">
+            <i class="fas fa-eye"></i>
+            <h3>Eye Enchantments</h3>
+            <p>Palettes, Mascaras & Liners</p>
+          </div>
+          <div class="cat-card" onclick="filterCategory('Skincare')">
+            <i class="fas fa-spa"></i>
+            <h3>Radiant Skincare</h3>
+            <p>Serums, Mists & Glow Oils</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCTS TAB -->
+      <div id="products" class="tab-content">
+        <h2 class="section-title">Our Beauty Collection (50+ Products)</h2>
+
+        <div class="shop-controls">
+          <div class="category-filters" id="categoryFilters">
+            <button class="filter-btn active" onclick="filterCategory('All')">All Products</button>
+            <button class="filter-btn bestseller-btn" onclick="filterCategory('BestSellers')"><i class="fas fa-fire" style="color:var(--gold);"></i> Best Sellers</button>
+            <button class="filter-btn promo-btn" onclick="filterCategory('Promos')"><i class="fas fa-percent" style="color:var(--promo-red);"></i> On Promo / Sale</button>
+            <button class="filter-btn" onclick="filterCategory('Lips')">Lips</button>
+            <button class="filter-btn" onclick="filterCategory('Face')">Face</button>
+            <button class="filter-btn" onclick="filterCategory('Eyes')">Eyes</button>
+            <button class="filter-btn" onclick="filterCategory('Skincare')">Skincare</button>
+          </div>
+
+          <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="Search product or shade..." oninput="renderProducts()">
+          </div>
+        </div>
+
+        <div class="products-grid" id="productsGrid">
+          <!-- Dynamically Populated by JavaScript -->
+        </div>
+      </div>
+
+      <!-- ABOUT US TAB -->
+      <div id="about" class="tab-content">
+        <div class="info-section">
+          <h3>Our Story</h3>
+          <p>Welcome to <strong>ZHEAYPRILL'S COSMETICS</strong>! Founded with a vision to celebrate individuality, elegance, and vibrant self-expression, we create premium-quality cosmetics that bring out your natural beauty. Whether you prefer a subtle everyday nude or a bold, daring glam look, our formulations are tailored to fit every complexion with elegance.</p>
+          <br>
+          <p>Every product in our collection is 100% cruelty-free, dermatologically tested, and enriched with skin-loving vitamins to ensure you feel as amazing as you look.</p>
+        </div>
+
+        <div class="info-section">
+          <h3>Why Choose Zheayprill's?</h3>
+          <ul style="padding-left: 20px; line-height: 2;">
+            <li><strong style="color: var(--primary-dark);">Diverse Shades:</strong> Designed carefully for all complexions and skin undertones.</li>
+            <li><strong style="color: var(--primary-dark);">Cruelty-Free & Paraben-Free:</strong> Formulated with ethical and nourishing components.</li>
+            <li><strong style="color: var(--primary-dark);">All-Day Wear:</strong> Long-lasting pigment that keeps you radiant from dawn to dusk.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CONTACT US TAB -->
+      <div id="contact" class="tab-content">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-grid">
+          <div class="info-section">
+            <h3>Customer Support</h3>
+            <p><i class="fas fa-envelope" style="color:var(--primary-dark);"></i> support@zheayprillscosmetics.com</p><br>
+            <p><i class="fas fa-phone" style="color:var(--primary-dark);"></i> +63 917 123 4567</p><br>
+            <p><i class="fas fa-map-marker-alt" style="color:var(--primary-dark);"></i> Zheayprill's Cosmetics Flagship Store, Glow Avenue, Manila, Philippines</p>
+          </div>
+
+          <div class="info-section">
+            <h3>Send Us a Message</h3>
+            <form onsubmit="handleContactSubmit(event)">
+              <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="contactName" required placeholder="Your name">
+              </div>
+              <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="contactEmail" required placeholder="your.email@example.com">
+              </div>
+              <div class="form-group">
+                <label>Message</label>
+                <textarea rows="4" required placeholder="How can we help you?"></textarea>
+              </div>
+              <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- HISTORY OF PURCHASES TAB -->
+      <div id="history" class="tab-content">
+        <h2 class="section-title">Purchase History</h2>
+        <div id="historyList">
+          <!-- Rendered via JS -->
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CART SIDEBAR MODAL -->
+    <div class="cart-overlay" id="cartOverlay">
+      <div class="cart-sidebar">
+        <div class="cart-header">
+          <h2>Your Shopping Bag</h2>
+          <button class="close-cart" onclick="toggleCart()">&times;</button>
+        </div>
+
+        <div class="cart-body-scroll">
+          <div class="cart-items" id="cartItemsContainer">
+            <!-- Rendered via JS -->
+          </div>
+
+          <!-- PROMO CODE INPUT SECTION -->
+          <div class="promo-code-container" id="promoCodeSection" style="display:none;">
+            <i class="fas fa-ticket-alt" style="color: var(--primary-dark);"></i>
+            <input type="text" id="promoCodeInput" placeholder="Promo Code (GLOWZHEAY)">
+            <button type="button" onclick="applyPromoCode()">Apply</button>
+          </div>
+
+          <!-- CUSTOMER SHIPPING INFORMATION FORM -->
+          <div class="checkout-customer-section" id="customerInfoSection">
+            <h4><i class="fas fa-address-card"></i> Customer Delivery Details</h4>
+            <div class="cust-input-group">
+              <label>Full Name *</label>
+              <input type="text" id="custFullName" required placeholder="e.g. Maria Clara Santos">
+            </div>
+            <div class="cust-input-group">
+              <label>Phone / Contact Number *</label>
+              <input type="tel" id="custPhone" required placeholder="e.g. 09171234567">
+            </div>
+            <div class="cust-input-group">
+              <label>Delivery Address *</label>
+              <textarea id="custAddress" rows="2" required placeholder="House No., Street, Barangay"></textarea>
+            </div>
+            <div class="cust-input-group">
+              <label>City / Province *</label>
+              <input type="text" id="custCity" required placeholder="e.g. Quezon City, Metro Manila">
+            </div>
+          </div>
+        </div>
+
+        <div class="cart-footer">
+          <div class="cart-summary-row">
+            <span>Subtotal:</span>
+            <span id="cartSubtotal">₱0.00</span>
+          </div>
+          <div class="cart-summary-row" id="discountRow" style="display:none; color: var(--promo-red);">
+            <span>Promo Discount:</span>
+            <span id="cartDiscount">-₱0.00</span>
+          </div>
+          <div class="cart-total-row">
+            <span>Total Amount:</span>
+            <span id="cartTotal">₱0.00</span>
+          </div>
+
+          <div class="payment-options">
+            <label><i class="fas fa-wallet"></i> Select Payment Method:</label>
+            <div class="payment-methods">
+              <div class="pay-method active" id="payCOD" onclick="selectPayment('COD')">
+                <i class="fas fa-truck"></i> Cash On Delivery
+              </div>
+              <div class="pay-method" id="payGCash" onclick="selectPayment('GCash')">
+                <i class="fas fa-mobile-alt"></i> GCash
+              </div>
+            </div>
+
+            <div class="gcash-details" id="gcashBox">
+              <p><strong>GCash Number:</strong> 0917-888-9999</p>
+              <p><strong>Account Name:</strong> ZHEAYPRILL C.</p>
+              <small>Please transfer total amount before submitting checkout.</small>
+            </div>
+          </div>
+
+          <button class="checkout-btn" onclick="processCheckout()">Complete Checkout</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div class="toast" id="toast">Product added to bag!</div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-col">
+          <h4>ZHEAYPRILL'S COSMETICS</h4>
+          <p>Elevating beauty through luxurious, colorful, and skin-loving cosmetics designed for everyone.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#" onclick="switchTab('home')" style="color:#ebd3da;">Home</a></li>
+            <li><a href="#" onclick="switchTab('products')" style="color:#ebd3da;">All Products</a></li>
+            <li><a href="#" onclick="switchTab('about')" style="color:#ebd3da;">About Us</a></li>
+            <li><a href="#" onclick="switchTab('contact')" style="color:#ebd3da;">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Accepted Payments</h4>
+          <p><i class="fas fa-check-circle" style="color:var(--gold)"></i> GCash E-Wallet</p>
+          <p><i class="fas fa-check-circle" style="color:var(--gold)"></i> Cash On Delivery (COD)</p>
+        </div>
+      </div>
+      <div class="copyright">
+        &copy; 2026 ZHEAYPRILL'S COSMETICS. All Rights Reserved. Crafted with passion & beauty.
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    // --- 3D TILT EFFECT LOGIC FOR INTERACTIVE CARDS ---
+    function handle3DTilt(event, card) {
+      const rect = card.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      
+      const rotateX = ((y - centerY) / centerY) * -15;
+      const rotateY = ((x - centerX) / centerX) * 15;
+      
+      card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    }
+
+    function reset3DTilt(card) {
+      card.style.transform = `rotateX(0deg) rotateY(0deg)`;
+    }
+
+    // --- 50+ PRODUCTS GENERATION WITH BESTSELLERS & PROMOS ---
+    const cosmeticsData = [
+      { name: "Velvet Matte Lipstick", cat: "Lips", price: 349, shades: ["Velvet Ruby", "Rose Wood", "Nude Mocha", "Berry Crush"] },
+      { name: "Glow Tinted Lip Oil", cat: "Lips", price: 299, shades: ["Cherry Blossom", "Honey Peach", "Clear Sparkle", "Plum Jam"] },
+      { name: "High-Shine Lip Gloss", cat: "Lips", price: 279, shades: ["Glazed Donut", "Rose Quartz", "Golden Hour", "Pink Diamond"] },
+      { name: "Long-Wear Liquid Lip Ink", cat: "Lips", price: 380, shades: ["Scarlet Red", "Mauve Magic", "Brick Orange", "Deep Mauve"] },
+      { name: "Hydrating Lip Butter Balm", cat: "Lips", price: 220, shades: ["Vanilla Nude", "Sweet Strawberry", "Wild Berry", "Caramel Tint"] },
+      { name: "Satin Cream Lipstick", cat: "Lips", price: 360, shades: ["Blush Nude", "Coral Charm", "Retro Crimson", "Warm Taupe"] },
+      { name: "Plumping Gloss Lacquer", cat: "Lips", price: 320, shades: ["Icy Mint", "Peachy Glow", "Sparkling Sunset"] },
+      { name: "Precision Lip Liner Duo", cat: "Lips", price: 250, shades: ["Chestnut Nude", "Rosewood", "Classic Red"] },
+      { name: "Matte Lip Crayon", cat: "Lips", price: 290, shades: ["Spiced Chai", "Petal Pink", "Vintage Wine"] },
+      { name: "Water Tint Lip Stain", cat: "Lips", price: 240, shades: ["Grape Pop", "Juicy Coral", "Cherry Red"] },
+      { name: "Nourishing Night Lip Mask", cat: "Lips", price: 310, shades: ["Berry Vanilla", "Peach Milk"] },
+      { name: "Metallic Liquid Lipstick", cat: "Lips", price: 390, shades: ["Copper Shimmer", "Rose Gold Flare"] },
+      { name: "Soft Blur Lip Mousse", cat: "Lips", price: 330, shades: ["Cinnamon Roll", "Dusty Rose", "Apricot Soft"] },
+      { name: "Two-Tone Gradient Bar", cat: "Lips", price: 350, shades: ["Red/Coral Burst", "Pink/Plum Blend"] },
+
+      { name: "Radiant Skin Serum Foundation", cat: "Face", price: 599, shades: ["Porcelain Warm", "Ivory Beige", "Warm Honey", "Golden Chestnut", "Deep Espresso"] },
+      { name: "Full Coverage Cream Concealer", cat: "Face", price: 320, shades: ["Fair Light", "Medium Sand", "Warm Tan", "Rich Bronze"] },
+      { name: "Velvet Translucent Powder", cat: "Face", price: 380, shades: ["Universal Brightening", "Banana Warm", "Translucent Clear"] },
+      { name: "Luminous Liquid Highlighter", cat: "Face", price: 420, shades: ["Champagne Pop", "Rose Quartz Glow", "Bronze Goddess"] },
+      { name: "Soft Pillow Cream Blush Stick", cat: "Face", price: 350, shades: ["Coral Sunrise", "Berry Flush", "Peach Glow", "Rose Petal"] },
+      { name: "Sunkissed Matte Bronzer", cat: "Face", price: 410, shades: ["Golden Sands", "Terracotta Sun", "Deep Mocha"] },
+      { name: "Cushion Foundation SPF 50+", cat: "Face", price: 650, shades: ["Light Beige", "Natural Beige", "Warm Honey"] },
+      { name: "Setting Spray All-Day Hold", cat: "Face", price: 390, shades: ["Dewy Finish", "Matte Control"] },
+      { name: "Illuminating Makeup Primer", cat: "Face", price: 450, shades: ["Pearl Glow", "Pore Blur Finish"] },
+      { name: "Pressed Mineral Powder Compact", cat: "Face", price: 360, shades: ["Vanilla", "Beige", "Warm Sand"] },
+      { name: "Dual Contour & Highlight Stick", cat: "Face", price: 370, shades: ["Light Medium", "Medium Deep"] },
+      { name: "Color Correcting Primer Base", cat: "Face", price: 420, shades: ["Green Mint (Anti-Redness)", "Purple Lavender (Brightening)"] },
+      { name: "Baked Mineral Powder Blush", cat: "Face", price: 340, shades: ["Terracotta Sparkle", "Peach Pearl"] },
+      { name: "Glass Skin Face Oil", cat: "Face", price: 520, shades: ["Pure Crystal Glow"] },
+
+      { name: "18-Pan Enchanted Eyeshadow Palette", cat: "Eyes", price: 799, shades: ["Sunset Romance", "Nude Neutrals", "Glitter Glam"] },
+      { name: "Waterproof Precision Liquid Eyeliner", cat: "Eyes", price: 280, shades: ["Jet Black", "Dark Espresso", "Midnight Navy"] },
+      { name: "Volumizing & Lifting Mascara", cat: "Eyes", price: 350, shades: ["Ultra Black", "Waterproof Black"] },
+      { name: "Micro Brow Definer Pencil", cat: "Eyes", price: 230, shades: ["Soft Brown", "Dark Brown", "Graphite Black", "Taupe"] },
+      { name: "Liquid Metallic Eyeshadow", cat: "Eyes", price: 310, shades: ["Champagne Sparkle", "Rose Gold Dust", "Bronze Shimmer"] },
+      { name: "Eyebrow Sculpting Gel Soap", cat: "Eyes", price: 190, shades: ["Clear Laminate", "Brown Tint"] },
+      { name: "Smudge-Proof Gel Eyeliner Pot", cat: "Eyes", price: 290, shades: ["Rich Fudge", "Deep Obsidian"] },
+      { name: "False Lash Effect Waterproof Mascara", cat: "Eyes", price: 380, shades: ["Intense Charcoal"] },
+      { name: "Eyeshadow Smoothing Primer", cat: "Eyes", price: 270, shades: ["Nude Canvas"] },
+      { name: "Glitter Dust Loose Pigment", cat: "Eyes", price: 220, shades: ["Diamond Shine", "Gold Dust", "Pink Prism"] },
+      { name: "Kohl Kajal Eyeliner Pencil", cat: "Eyes", price: 210, shades: ["Deep Black", "Smoky Brown"] },
+      { name: "9-Pan Pocket Eyeshadow Quad", cat: "Eyes", price: 450, shades: ["Warm Peach Palette", "Smoky Velvet Palette"] },
+
+      { name: "Rosewater & Aloe Vera Facial Mist", cat: "Skincare", price: 290, shades: ["Hydrating Rose Blend"] },
+      { name: "Vitamin C Brightening Serum", cat: "Skincare", price: 580, shades: ["Concentrated Glow Formula"] },
+      { name: "Hyaluronic Acid Plumping Moisturizer", cat: "Skincare", price: 620, shades: ["Lightweight Gel Cream"] },
+      { name: "Gentle Foaming Cleanser", cat: "Skincare", price: 320, shades: ["Calming Chamomile"] },
+      { name: "Sun Barrier Sunscreen Serum SPF 50", cat: "Skincare", price: 490, shades: ["Invisible No White-Cast"] },
+      { name: "Overnight Renewal Facial Oil", cat: "Skincare", price: 690, shades: ["Botanical Elixir"] },
+      { name: "Niacinamide Pore Refining Concentrate", cat: "Skincare", price: 540, shades: ["10% Pure Serum"] },
+      { name: "Collagen Eye Repair Cream", cat: "Skincare", price: 430, shades: ["Anti-Puffiness Blend"] },
+      { name: "Exfoliating AHA/BHA Toner Mist", cat: "Skincare", price: 380, shades: ["Glow Clarifying Solution"] },
+      { name: "Clay Detox Charcoal Face Mask", cat: "Skincare", price: 350, shades: ["Deep Purifying Paste"] },
+      { name: "Soothing Cica Gel Moisturizer", cat: "Skincare", price: 410, shades: ["Calming Green Formula"] },
+      { name: "Sleeping Beauty Hydrating Mask", cat: "Skincare", price: 460, shades: ["Lavender Calm"] }
+    ];
+
+    const categoryImages = {
+      Lips: [
+        'https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=500&q=80',
+        'https://images.unsplash.com/photo-1625093742435-6fa192b6fb10?auto=format&fit=crop&w=500&q=80',
+        'https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=500&q=80'
+      ],
+      Face: [
+        'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=500&q=80',
+        'https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=500&q=80',
+        'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=500&q=80'
+      ],
+      Eyes: [
+        'https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=500&q=80',
+        'https://images.unsplash.com/photo-1583241800698-e8ab01c85b27?auto=format&fit=crop&w=500&q=80'
+      ],
+      Skincare: [
+        'https://images.unsplash.com/photo-1608248597261-83325803d360?auto=format&fit=crop&w=500&q=80',
+        'https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=500&q=80'
+      ]
+    };
+
+    const products = cosmeticsData.map((item, idx) => {
+      const imgs = categoryImages[item.cat];
+      const img = imgs[idx % imgs.length];
+      const isBestseller = idx % 3 === 0;
+      const isPromo = idx % 4 === 1;
+      const originalPrice = isPromo ? Math.round(item.price * 1.25) : item.price;
+
+      return {
+        id: idx + 1,
+        name: item.name,
+        category: item.cat,
+        price: item.price,
+        originalPrice: originalPrice,
+        shades: item.shades,
+        image: img,
+        isBestseller: isBestseller,
+        isPromo: isPromo,
+        promoLabel: isPromo ? (idx % 2 === 0 ? "20% OFF" : "BUY 1 GET 1") : null
+      };
+    });
+
+    // --- APPLICATION STATE ---
+    let currentUser = JSON.parse(localStorage.getItem('zheayprill_user')) || null;
+    let cart = [];
+    let appliedDiscountRate = 0;
+    let selectedCategory = 'All';
+    let selectedPayment = 'COD';
+    let purchaseHistory = JSON.parse(localStorage.getItem('zheayprill_history')) || [];
+
+    // --- AUTHENTICATION SYSTEM ---
+    function toggleAuthMode(mode) {
+      document.getElementById('loginTabBtn').classList.toggle('active', mode === 'login');
+      document.getElementById('registerTabBtn').classList.toggle('active', mode === 'register');
+      document.getElementById('loginForm').style.display = mode === 'login' ? 'block' : 'none';
+      document.getElementById('registerForm').style.display = mode === 'register' ? 'block' : 'none';
+    }
+
+    function openAuthOverlay() {
+      document.getElementById('authOverlay').style.display = 'flex';
+    }
+
+    function closeAuthOverlay() {
+      document.getElementById('authOverlay').style.display = 'none';
+    }
+
+    function handleAuthSubmit(event, mode) {
+      event.preventDefault();
+      if (mode === 'login') {
+        const email = document.getElementById('loginEmail').value;
+        const namePart = email.split('@')[0];
+        const formattedName = namePart.charAt(0).toUpperCase() + namePart.slice(1);
+        currentUser = { name: formattedName, email: email };
+      } else {
+        const name = document.getElementById('regName').value;
+        const email = document.getElementById('regEmail').value;
+        currentUser = { name: name, email: email };
+      }
+
+      localStorage.setItem('zheayprill_user', JSON.stringify(currentUser));
+      closeAuthOverlay();
+      updateUserUI();
+      showToast(`Welcome, ${currentUser.name}!`);
+    }
+
+    function handleLogout() {
+      if (confirm("Are you sure you want to log out from Zheayprill's Cosmetics?")) {
+        currentUser = null;
+        localStorage.removeItem('zheayprill_user');
+        updateUserUI();
+        showToast("Logged out successfully.");
+      }
+    }
+
+    function updateUserUI() {
+      if (currentUser) {
+        document.getElementById('userNameDisplay').textContent = currentUser.name;
+        document.getElementById('logoutBtn').style.display = 'block';
+        
+        // Auto-fill forms
+        document.getElementById('custFullName').value = currentUser.name || '';
+        document.getElementById('contactName').value = currentUser.name || '';
+        document.getElementById('contactEmail').value = currentUser.email || '';
+      } else {
+        document.getElementById('userNameDisplay').textContent = 'Guest';
+        document.getElementById('logoutBtn').style.display = 'none';
+      }
+    }
+
+    // --- PRODUCT CLICK HANDLER (TRIGGERS LOGIN POPUP IF NOT LOGGED IN) ---
+    function handleProductClick(productId) {
+      if (!currentUser) {
+        openAuthOverlay();
+        return;
+      }
+      // Kung naka-log in na, pwede silang dumiretso o pumili ng produkto
+      switchTab('products');
+    }
+
+    // --- TAB SWITCHING ---
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('active'));
+
+      document.getElementById(tabId).classList.add('active');
+      const activeNav = document.querySelector(`.nav-tab[data-tab="${tabId}"]`);
+      if (activeNav) activeNav.classList.add('active');
+
+      if (tabId === 'home') renderHomeBestsellers();
+      if (tabId === 'products') renderProducts();
+      if (tabId === 'history') renderHistory();
+      
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // --- RENDER PRODUCTS GRID ---
+    function renderProductCardHTML(product) {
+      return `
+        <div class="product-card">
+          <div class="badge-container">
+            ${product.isBestseller ? '<span class="badge-bestseller"><i class="fas fa-crown"></i> BEST SELLER</span>' : ''}
+            ${product.isPromo ? `<span class="badge-promo"><i class="fas fa-tag"></i> ${product.promoLabel}</span>` : ''}
+          </div>
+
+          <div class="product-img-wrapper" onclick="handleProductClick(${product.id})">
+            <img src="${product.image}" alt="${product.name}" loading="lazy">
+          </div>
+          <div class="product-details">
+            <span class="product-cat">${product.category}</span>
+            <h3 class="product-title" onclick="handleProductClick(${product.id})">${product.name}</h3>
+            
+            <div class="product-shade-select">
+              <label style="font-size:0.75rem; color:var(--text-light); font-weight:500;">Select Shade:</label>
+              <select id="shade-select-${product.id}">
+                ${product.shades.map(shade => `<option value="${shade}">${shade}</option>`).join('')}
+              </select>
+            </div>
+
+            <div class="price-row">
+              <div class="price-group">
+                ${product.isPromo ? `<span class="original-price">₱${product.originalPrice.toLocaleString()}</span>` : ''}
+                <span class="product-price ${product.isPromo ? 'discounted' : ''}">₱${product.price.toLocaleString()}</span>
+              </div>
+              <button class="add-to-cart-btn" onclick="addToCart(${product.id})">
+                <i class="fas fa-plus"></i> Add
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderHomeBestsellers() {
+      const container = document.getElementById('homeBestsellersGrid');
+      const bestsellers = products.filter(p => p.isBestseller).slice(0, 4);
+      container.innerHTML = bestsellers.map(p => renderProductCardHTML(p)).join('');
+    }
+
+    function renderProducts() {
+      const grid = document.getElementById('productsGrid');
+      const searchQuery = document.getElementById('searchInput').value.toLowerCase();
+
+      const filtered = products.filter(p => {
+        let matchesCat = false;
+        if (selectedCategory === 'All') matchesCat = true;
+        else if (selectedCategory === 'BestSellers') matchesCat = p.isBestseller;
+        else if (selectedCategory === 'Promos') matchesCat = p.isPromo;
+        else matchesCat = p.category === selectedCategory;
+
+        const matchesSearch = p.name.toLowerCase().includes(searchQuery) || 
+                              p.shades.some(s => s.toLowerCase().includes(searchQuery));
+
+        return matchesCat && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 50px; color: var(--text-light);">
+          <h3>No products found matching your search or category filter.</h3>
+        </div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(product => renderProductCardHTML(product)).join('');
+    }
+
+    function filterCategory(cat) {
+      selectedCategory = cat;
+      const buttons = document.querySelectorAll('.filter-btn');
+      buttons.forEach(btn => {
+        const text = btn.textContent.trim();
+        if (cat === 'All' && text.includes('All')) btn.classList.add('active');
+        else if (cat === 'BestSellers' && text.includes('Best Sellers')) btn.classList.add('active');
+        else if (cat === 'Promos' && text.includes('Promo')) btn.classList.add('active');
+        else if (text === cat) btn.classList.add('active');
+        else btn.classList.remove('active');
+      });
+
+      if (!document.getElementById('products').classList.contains('active')) {
+        switchTab('products');
+      } else {
+        renderProducts();
+      }
+    }
+
+    // --- CART & PROMO CODE FUNCTIONALITY ---
+    function toggleCart() {
+      if (!currentUser) {
+        openAuthOverlay();
+        return;
+      }
+      const overlay = document.getElementById('cartOverlay');
+      overlay.classList.toggle('active');
+    }
+
+    function addToCart(productId) {
+      // Kapag nag-click ng Add to cart at hindi pa naka-log in, mag-aappear ang log in pop-up
+      if (!currentUser) {
+        openAuthOverlay();
+        return;
+      }
+
+      const product = products.find(p => p.id === productId);
+      const shadeSelect = document.getElementById(`shade-select-${productId}`);
+      const selectedShade = shadeSelect ? shadeSelect.value : product.shades[0];
+
+      const existingIndex = cart.findIndex(item => item.id === productId && item.shade === selectedShade);
+
+      if (existingIndex > -1) {
+        cart[existingIndex].qty += 1;
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.image,
+          shade: selectedShade,
+          qty: 1
+        });
+      }
+
+      updateCartUI();
+      showToast(`Added ${product.name} (${selectedShade}) to bag!`);
+    }
+
+    function updateCartQty(index, delta) {
+      cart[index].qty += delta;
+      if (cart[index].qty <= 0) {
+        cart.splice(index, 1);
+      }
+      updateCartUI();
+    }
+
+    function applyPromoCode() {
+      const codeInput = document.getElementById('promoCodeInput').value.trim().toUpperCase();
+      if (codeInput === 'GLOWZHEAY') {
+        appliedDiscountRate = 0.10;
+        alert('🎉 Promo Code Applied! You got 10% OFF on your entire order.');
+      } else if (codeInput === 'BESTSELLER20') {
+        appliedDiscountRate = 0.20;
+        alert('🎉 Mega Promo Code Applied! You got 20% OFF on your entire order.');
+      } else {
+        alert('❌ Invalid Promo Code. Try using "GLOWZHEAY" or "BESTSELLER20".');
+        appliedDiscountRate = 0;
+      }
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const container = document.getElementById('cartItemsContainer');
+      const badge = document.getElementById('cartBadge');
+      const subtotalEl = document.getElementById('cartSubtotal');
+      const discountRow = document.getElementById('discountRow');
+      const discountEl = document.getElementById('cartDiscount');
+      const totalEl = document.getElementById('cartTotal');
+      const promoSection = document.getElementById('promoCodeSection');
+
+      const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+      const subtotalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+      const discountAmount = subtotalPrice * appliedDiscountRate;
+      const grandTotal = subtotalPrice - discountAmount;
+
+      badge.textContent = totalItems;
+      subtotalEl.textContent = `₱${subtotalPrice.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+
+      if (appliedDiscountRate > 0) {
+        discountRow.style.display = 'flex';
+        discountEl.textContent = `-₱${discountAmount.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+      } else {
+        discountRow.style.display = 'none';
+      }
+
+      totalEl.textContent = `₱${grandTotal.toLocaleString(undefined, {minimumFractionDigits: 2})}`;
+
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div style="text-align: center; margin-top: 40px; color: var(--text-light);">
+            <i class="fas fa-shopping-bag" style="font-size: 3rem; color: var(--accent); margin-bottom: 15px;"></i>
+            <p>Your shopping bag is currently empty.</p>
+          </div>`;
+        document.getElementById('customerInfoSection').style.display = 'none';
+        promoSection.style.display = 'none';
+        return;
+      }
+
+      document.getElementById('customerInfoSection').style.display = 'block';
+      promoSection.style.display = 'flex';
+
+      container.innerHTML = cart.map((item, index) => `
+        <div class="cart-item">
+          <img src="${item.image}" alt="${item.name}">
+          <div class="cart-item-info">
+            <div class="cart-item-title">${item.name}</div>
+            <div class="cart-item-shade">Shade: ${item.shade}</div>
+            <div class="cart-item-price">₱${(item.price * item.qty).toLocaleString()}</div>
+            <div class="qty-controls">
+              <button class="qty-btn" onclick="updateCartQty(${index}, -1)">-</button>
+              <span style="font-size: 0.85rem; font-weight: 600;">${item.qty}</span>
+              <button class="qty-btn" onclick="updateCartQty(${index}, 1)">+</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function selectPayment(method) {
+      selectedPayment = method;
+      document.getElementById('payCOD').classList.toggle('active', method === 'COD');
+      document.getElementById('payGCash').classList.toggle('active', method === 'GCash');
+      document.getElementById('gcashBox').style.display = method === 'GCash' ? 'block' : 'none';
+    }
+
+    // --- CHECKOUT PROCESS ---
+    function processCheckout() {
+      if (cart.length === 0) {
+        alert("Your shopping bag is empty!");
+        return;
+      }
+
+      const custName = document.getElementById('custFullName').value.trim();
+      const custPhone = document.getElementById('custPhone').value.trim();
+      const custAddress = document.getElementById('custAddress').value.trim();
+      const custCity = document.getElementById('custCity').value.trim();
+
+      if (!custName || !custPhone || !custAddress || !custCity) {
+        alert("Please complete all Customer Delivery Details before proceeding.");
+        return;
+      }
+
+      const subtotalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+      const discountAmount = subtotalPrice * appliedDiscountRate;
+      const totalAmount = subtotalPrice - discountAmount;
+      const orderId = `ZCP-${Math.floor(10000 + Math.random() * 90000)}`;
+      const currentDate = new Date().toISOString().split('T')[0];
+
+      const newOrder = {
+        id: orderId,
+        date: currentDate,
+        customer: {
+          name: custName,
+          phone: custPhone,
+          address: custAddress,
+          city: custCity
+        },
+        items: [...cart],
+        total: totalAmount,
+        discount: discountAmount,
+        payment: selectedPayment,
+        status: selectedPayment === 'GCash' ? 'Payment Verified (Preparing)' : 'Order Placed (COD)'
+      };
+
+      purchaseHistory.unshift(newOrder);
+      localStorage.setItem('zheayprill_history', JSON.stringify(purchaseHistory));
+
+      alert(`Thank you for buying from ZHEAYPRILL'S COSMETICS!\n\nOrder Ref: ${orderId}\nCustomer: ${custName}\nShip To: ${custAddress}, ${custCity}\nContact: ${custPhone}\nPayment Method: ${selectedPayment}\nTotal Amount Paid: ₱${totalAmount.toLocaleString()}`);
+
+      cart = [];
+      appliedDiscountRate = 0;
+      document.getElementById('promoCodeInput').value = '';
+      updateCartUI();
+      toggleCart();
+      switchTab('history');
+    }
+
+    // --- PURCHASE HISTORY ---
+    function renderHistory() {
+      if (!currentUser) {
+        openAuthOverlay();
+        return;
+      }
+      const container = document.getElementById('historyList');
+
+      if (purchaseHistory.length === 0) {
+        container.innerHTML = `
+          <div class="info-section" style="text-align: center;">
+            <p>You have no past purchases recorded yet.</p>
+          </div>`;
+        return;
+      }
+
+      container.innerHTML = purchaseHistory.map(order => `
+        <div class="history-card">
+          <div class="history-header">
+            <div>
+              <span class="order-id">Order #${order.id}</span>
+              <span class="history-badge" style="margin-left: 10px;">${order.status}</span>
+            </div>
+            <div class="order-date">${order.date}</div>
+          </div>
+
+          ${order.customer ? `
+          <div class="history-customer-info">
+            <i class="fas fa-user-tag" style="color:var(--primary-dark)"></i> <strong>${order.customer.name}</strong> (${order.customer.phone})<br>
+            <i class="fas fa-map-marker-alt" style="color:var(--primary-dark)"></i> ${order.customer.address}, ${order.customer.city}
+          </div>` : ''}
+
+          <div class="history-items">
+            ${order.items.map(item => `
+              <div class="history-item-row">
+                <span>${item.qty}x ${item.name} (${item.shade || 'Default'})</span>
+                <span style="font-weight: 600;">₱${(item.price * item.qty).toLocaleString()}</span>
+              </div>
+            `).join('')}
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed #f0d5dd; padding-top: 10px; margin-top: 10px;">
+            <span style="font-size: 0.85rem; color: var(--text-light);">Payment: <strong>${order.payment}</strong></span>
+            <span style="font-size: 1.1rem; font-weight: 700; color: var(--primary-dark);">Total: ₱${order.total.toLocaleString()}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // --- HELPER TOAST ---
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.textContent = msg;
+      toast.style.display = 'block';
+      setTimeout(() => {
+        toast.style.display = 'none';
+      }, 3000);
+    }
+
+    function handleContactSubmit(e) {
+      e.preventDefault();
+      alert("Thank you for sending a message to ZHEAYPRILL'S COSMETICS! Our beauty support team will get back to you shortly.");
+      e.target.reset();
+    }
+
+    // Initialize Page
+    document.addEventListener('DOMContentLoaded', () => {
+      updateUserUI();
+      renderHomeBestsellers();
+      renderProducts();
+    });
+  </script>
+</body>
+</html>
